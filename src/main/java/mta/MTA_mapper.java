@@ -1,4 +1,4 @@
-package main.java.mta;
+package mta;
 
 import mta.clean.CleanRules;
 import mta.profile.CsvLine;

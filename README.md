@@ -24,6 +24,7 @@ Jobs run with Hadoop in local mode (`mvn` + Java only; no cluster needed).
 | Quality (duplicates, missing hours) | `scripts/quality.sh data_valid data_quality` | `data_quality/report.txt` |
 | Profile one column | `scripts/profile.sh data_valid ridership 20` | `out/<column>/report.txt` |
 | Everything except profiling | `scripts/pipeline.sh 2023 2024` | |
+| Quick demo on a 39-row subset (about 40 s) | `scripts/demo_subset.sh` | `data_subset/` (prints PASS/FAIL against the expected rows) |
 
 Known issue: 27 multi-entrance stations have several lat/lon pairs per `station_complex_id`, so the aggregate step leaves
 duplicate (station, hour) rows for them (`quality.sh` reports them).

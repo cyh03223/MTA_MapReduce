@@ -8,4 +8,4 @@ IN="${1:?input}"; OUT="${2:?output}"
 [[ -f target/mta-mapreduce-1.0.jar ]] || mvn -q -DskipTests package
 java -Xmx2g -cp target/mta-mapreduce-1.0.jar mta.clean.CleanDriver \
   -D mapreduce.framework.name=local -D fs.defaultFS=file:/// \
-  "$IN" "$OUT" ${3:+"$3"} 2>&1 | grep -v -E 'log4j|^(INFO|WARN)|^[0-9]{4}-'
+  "$IN" "$OUT" ${3:+"$3"} 2>&1 | { grep -v -E 'log4j|^(INFO|WARN)|^[0-9]{4}-' || true; }   # hide Hadoop log noise; keep java's exit status
