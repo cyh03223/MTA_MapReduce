@@ -5,7 +5,7 @@ Jobs run with Hadoop in local mode (`mvn` + Java only; no cluster needed).
 
 ## Quick start: run the 39-row subset
 
-Needs Java 17+ and Maven (the first build downloads Hadoop from Maven Central, so allow a couple of minutes and an internet connection).
+Needs a JDK from **17 to 25** and Maven (the first build downloads Hadoop from Maven Central, so allow a couple of minutes and an internet connection).
 
 ```bash
 git clone https://github.com/cyh03223/MTA_MapReduce.git
@@ -20,6 +20,11 @@ PASS: final rows match the expected subset result
 ```
 
 Results are written to `data_subset/` (final rows in `data_subset/final.csv`); delete the folder any time.
+
+**Java versions:** tested on Java 17, 21, 22 and 25. Hadoop is bundled by Maven (no local Hadoop install is needed). Hadoop 3.4.1 and older
+fail on Java 23+ with `UnsupportedOperationException: getSubject is not supported` (HADOOP-19212); this project uses Hadoop 3.4.3, which fixes it.
+The scripts use the Java from `JAVA_HOME` or your default `java` if it is 17-25, otherwise they look for another installed JDK.
+Set `JAVA_VERBOSE=1` to see which Java a script picked.
 
 ## MapReduce code (`src/main/java/mta/`)
 | File | Contents |
