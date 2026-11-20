@@ -3,6 +3,24 @@
 Dataset: [MTA Subway Hourly Ridership 2020-2024](https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-2020-2024/wujg-7c2s) (Socrata `wujg-7c2s`).
 Jobs run with Hadoop in local mode (`mvn` + Java only; no cluster needed).
 
+## Quick start: run the 39-row subset
+
+Needs Java 17+ and Maven (the first build downloads Hadoop from Maven Central, so allow a couple of minutes and an internet connection).
+
+```bash
+git clone https://github.com/cyh03223/MTA_MapReduce.git
+cd MTA_MapReduce
+scripts/demo_subset.sh
+```
+
+The script builds the jar, downloads the 39 raw rows from the data.ny.gov API (or reads them from `data/` if you already ingested the months), runs project, aggregate, clean, validate and profile, and finishes in under a minute after the first build. Success ends with:
+
+```
+PASS: final rows match the expected subset result
+```
+
+Results are written to `data_subset/` (final rows in `data_subset/final.csv`); delete the folder any time.
+
 ## MapReduce code (`src/main/java/mta/`)
 | File | Contents |
 |---|---|
